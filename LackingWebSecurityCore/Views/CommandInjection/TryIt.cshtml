@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Playground";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                My Sample Application
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("TryIt")" method="post">
+                    <div class="form-group">
+                        <label for="hostname">Enter a hostname to ping</label>
+                        <input type="text" class="form-control" id="hostname" name="hostname" placeholder="Hostname">
+                        @Html.ValidationMessage("hostname","",new { @class = "text-danger" })
+                    </div>
+                    <input type="submit" name="Ping" class="btn btn-danger" value="Ping" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-danger" ng-switch-default>
+            <div class="panel-heading">
+                Command Output
+            </div>
+            <div class="panel-body">
+                <pre><code>@ViewBag.Output</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("Breadcrumbs")
+
+

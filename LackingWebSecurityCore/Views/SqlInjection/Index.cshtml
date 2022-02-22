@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*
+    Vision:
+        1) Have a header that gives a run down of Injection and links to Owasp page
+        2) Have one part of hte page show whats in the db so the user can see it and lets them repopulate the db with a seed button
+        3) Have three other parts of hte page, one for each different method in the service
+            a) each should have a code snippet showing the underlying code
+            b) each should have an input for user to enter MRN
+            c) each should have two buttons under the input, they will populate the user input with
+               an injectable string.  one for fishing for data and one for destroying data
+
+*@
+
+<div class="well">
+    <h1>Injection Attacks</h1>
+    <p class="lead">
+    Injection flaws, such as SQL, OS, and LDAP injection occur when untrusted data is sent to an interpreter as part of a command or query. 
+    The attacker’s hostile data can trick the interpreter into executing unintended commands or accessing data without proper authorization.
+    </p>
+    <p class="text-right">--OWASP Top 10 (2013)</p>
+    
+</div>
+
+<div class="row">
+    <div class="col-md-7 col-md-offset-2">
+        <a href="https://xkcd.com/327/" target="_blank" title="Bobby Tables"><img src="~/images/exploits_of_a_mom.png" class="img-responsive" /></a>
+        <div class="text-right">--XKCD &#35 327</div>
+    </div>
+</div>
+
+@Html.Partial("BreadCrumbs")

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "WhyItsImportant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@@ WhyItsImportant</h2>
+<div class="row">
+    <div class="col-md-12">
+        <p>
+            Now that you know how scary SQL Injection can be, you might be wondering why we should be so worried about it.  After all, who would want some PHI?
+            <br />
+            As it turns out, A LOT of people.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="ftb-widget" data-width="600" data-height="490" data-widget-id="eUDIVUkPKzb" data-href="https://www.graphiq.com/wlp/eUDIVUkPKzb"><a href="https://www.graphiq.com/wlp/eUDIVUkPKzb" target="_blank" style="font:14px/16px arial;color:#3d3d3d;">Data Breaches in 2014 by Industry | SoftwareInsider</a></div>
+        <script async src="https://s.graphiq.com/rx/widgets.js"></script>
+    </div>
+    <div class="col-md-6">
+        <h4>Some Scary Facts</h4>
+        <ul>
+            <li><strong>100,000,000</strong> - The number of health records stolen in the US 2015.  There are 300,000,000 people in the US.  So 1 in 3 people in this room have had their health care records compromised</li>
+            <li><strong>$60</strong> - The going rate for health records on the dark web.  To add some context, a credit card goes for $1-$3 and a social security number goes for $15</li>
+            <li><strong>It's Forever</strong> - If you're credit card or even social security number are compromised, you can get replacements.  Your health care information lasts forever.</li>
+            <li><strong>11,000%</strong> - The increase in health care-record hacking in 2015</li>
+        </ul>
+        <h4>What We Have To Do</h4>
+        <ul>
+            <li><strong>We have to be aware</strong></li>
+            <li><strong>We have to be proactive</strong> - Legacy code a very common source of injection vulnerabilities.  If you have legacy code that you think might be vulnerable, take a few minutes and look it over.</li>
+            <li><strong>We have to be aggressive</strong> - We have to aggressively search out and close vulnerabilities.</li>
+        </ul>
+        <p>The information for this page came from the sites listed below.  For more information, google search hacking health records</p>
+        <ul>
+            <li><a href="http://www.nbcnews.com/news/us-news/hacking-health-care-records-skyrockets-n517686" target="_blank">NBC News</a></li>
+            <li><a href="http://www.reuters.com/article/us-cybersecurity-hospitals-idUSKCN0HJ21I20140924" target="_blank">Reuters</a></li>
+            <li><a href="http://www.foxnews.com/politics/2015/12/23/cyberattack-surge-100m-medical-records-hacked-in-2015-officials-say.html" target="_blank">Fox News</a></li>
+        </ul>
+    </div>
+</div>
+
+@Html.Partial("BreadCrumbs")

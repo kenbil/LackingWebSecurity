@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Defenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <img src="~/images/Syrian.hacker.jpg" class="img-responsive" />
+    </div>
+    <div class="col-md-9">
+        <h2>Defenses</h2>
+        <p>Closing a SQL Injection vulnerability is easy but if you're vulnerable to a SQL Injection you're likely also vulnerable to other attacks.  It's very important to apply defense in depth principles.  Add security in multiple layers.  It helps
+        ensure that if one defense is breached there is another one waiting.  Applying one or more of these defenses will give you added security for not only SQL Injection but other risks as well.</p>
+
+        <h4>SQL Injection</h4>
+        <ol>
+            <li>Use an ORM (object relational mapper) for your database queries.  ORM's have two benefits.  
+                <ol>
+                    <li>They automatically parameterize your queries making them safe and limiting the code you have to write.</li>
+                    <li>They automatically map the data from the query into an object which saves you from having to write the mapping code.</li>
+                </ol>
+            </li>
+            <li>If you can't use an ORM, make sure you use a parameterized query.  You'll still have to manually do the query to object mapping but at least you'll be safe from injection</li>
+            <li>If you can't use an ORM and you can't use parameterized queries try to implement ESAPI.  It's an API written by the community that tries to escape special characters in user supplied input in the hopes of preventing injection.  It's important to note that
+            ESAPI should be a last resort only.  There are different versions of ESAPI for different languages.  It appears that only the Java version is actively maintained</li>
+        </ol>
+
+        <br />
+        <h4>Defense In Depth</h4>
+        <ol>
+            <li>Apply the principle of least privllege.  Most applications only need database permissions to read and write data to a series of tables.  Creating an account with restricted permissions is a simple and easy way to reduce your risk of injection</li>
+            <li>Use different ID's and passwords for different applications.  Each database should have it's own account.  If one application reads from multiple databases, you can use the same account but make sure you limit it's privilleges in each database</li>
+            <li>Whitelist your input if possible.  MRN's are great examples.  They are generally stored as strings in a database but they contain all numbers and are less than 8 digits long.  You can whitelist the input by applying a size limit and using a regular expression to ensure the data entered is numeric.</li>
+            <li>Used Stored Procedures.  Stored Procedures are a great way to prevent injection and they also can decouple your query logic from your business logic.</li>
+            <li>Don't trust your data.  This seems strange but if your application allows users to add records to the database, they could have entered malicious data in the hopes that it will be interpretted at some point.  In your code, you can't assume the data in your database is harmless you have to assume it's malicious</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <img src="~/images/MythBusters_logo.png" class="img-responsive" />
+    </div>
+    <div class="col-md-9">
+        <h2>SQL Injection Myths</h2>
+        <ul>
+            <li>Substituting all instances on a single quote in a query, with two single quotes will prevent injection
+                <ul>
+                    <li>It turns out this actually does a decent job of protecting you but it is by no means full proof.  The biggest issue is you need to remember to do this substitution with all of your inputs.  It's easy to forget especially on date or integer values read from a query string.</li>
+                    <li>Even if you did remember to do a replace on every field it's still risk.  It would probably work but that's a lot of room for error.</li>
+                </ul>
+            </li>
+            <li>Only queries with a WHERE clause are vulnerable.
+                <ul>
+                    <li>Any query that is dynamically built with user input is vulnerable.  Even INSERTS.</li>
+                </ul>
+            </li>
+            @*<li>Server side code for an application is expecting only a single query result.  If more than one come back it will throw an exception and the attacker won't get the data.
+                <ul>
+                    <li>An attacker can email the query results to themselves from the database server, circumventing the server side code that would throw the exception</li>
+                </ul>
+            </li>*@
+            <li>Stored Procedures aren't vulnerale to injection
+                <ul>
+                    <li>An improperly written stored procedure can still be vulnerable if it dynmically builds the query with user input.  This isn't very common but can happen.</li>
+                </ul>
+            </li>
+            <li>Legacy code is vulnerable to injection but newer code isn't so there is nothing to worry about
+                <ul>
+                    <li>This can be true unless the principles of least restistance weren't followed.  If a single user account has access to multiple databases on the same server, the attacker
+                    could use the legacy application as an entry point to the newer application's database</li>
+                </ul>
+            </li>
+            <li>Whitelisting input in the UI layer only is enough to prevent injection
+                <ul>
+                    <li>An attacker can use a proxy like fiddler to modify the request after it's left the browser but before it gets to the server.  If the security code is only applied in the UI, it can be easily circumvented.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+@Html.Partial("BreadCrumbs")

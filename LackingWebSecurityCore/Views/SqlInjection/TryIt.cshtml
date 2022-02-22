@@ -1,0 +1,191 @@
+﻿@{
+    ViewBag.Title = "Playground";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div ng-app="LackingWebSecurity">
+        <div ng-controller="SqlInjectionController as injection">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            My Sample Application
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>In this application the user can search for a patient by MRN.  <br /><br />Enter an MRN to and click the Execute button to see the results.  You can optionally pick a common injection and defense to compare the results.</p>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <input type="text" ng-model="injection.mrnToSearch" ng-change="injection.SaveState()" class="form-control" placeholder="Enter an MRN to search for" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Common Injections
+                                </div>
+                                <div class="col-md-8">
+                                    <label>
+                                        <input type="radio" ng-model="injection.exploitType" ng-change="injection.Exploit()" value="none" />
+                                        None
+                                    </label>
+                                    <label>
+                                        <input type="radio" ng-model="injection.exploitType" ng-change="injection.Exploit()" value="theft" />
+                                        Theft
+                                    </label>
+                                    <label>
+                                        <input type="radio" ng-model="injection.exploitType" ng-change="injection.Exploit()" value="integrity" />
+                                        Integrity
+                                    </label>
+                                    <label>
+                                        <input type="radio" ng-model="injection.exploitType" ng-change="injection.Exploit()" value="destroy" />
+                                        Destroy
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Query Type
+                                </div>
+                                <div class="col-md-8">
+                                    <label>
+                                        <input type="radio" ng-model="injection.queryType" value="vulnerable" />
+                                        Vulnerable
+                                    </label>
+                                    <label>
+                                        <input type="radio" ng-model="injection.queryType" value="param" />
+                                        Parameterized
+                                    </label>
+                                    <label>
+                                        <input type="radio" ng-model="injection.queryType" value="orm" />
+                                        ORM
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" ng-switch="injection.queryType">
+                    <div class="panel panel-danger" ng-switch-default>
+                        <div class="panel-heading">
+                            Bad - Non-Parameterized Query
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                SELECT * <br />
+                                FROM Patients <br />
+                                WHERE MRN='{{(injection.mrnToSearch == null || injection.mrnToSearch.length == 0) ? ' + someVariable + ' : injection.mrnToSearch}}'
+                            </p>
+                        </div>
+                        <div class="panel-footer">
+                            <button class="btn btn-danger form-control" type="button" ng-click="injection.GetPatient_Bad()">
+                                Execute
+                            </button>
+                        </div>
+                    </div>
+                    <div class="panel panel-info" ng-switch-when="param">
+                        <div class="panel-heading">
+                            Better - Parameterized Query
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                SELECT * <br />
+                                FROM Patients <br />
+                                WHERE MRN=@@mrn <br /><br />
+                                @@mrn = {{(injection.mrnToSearch == null || injection.mrnToSearch.length == 0) ? '' : injection.mrnToSearch}}
+                            </p>
+                        </div>
+                        <div class="panel-footer">
+                            <button class="btn btn-info form-control" type="button" ng-click="injection.GetPatient_Better()">
+                                Execute
+                            </button>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary" ng-switch-when="orm">
+                        <div class="panel-heading">
+                            Best - ORM (EntityFramework)
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                context<br />
+                                .Patients<br />
+                                .Where(p => p.MRN == MRN)
+                            </p>
+                        </div>
+                        <div class="panel-footer">
+                            <button class="btn btn-primary form-control" type="button" ng-click="injection.GetPatient_Best()">
+                                Execute
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Query Result</div>
+                        <div class="panel-body">
+                            <p>These are the results returned by the query</p>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>MRN</td>
+                                    <td>FirstName</td>
+                                    <td>LastName</td>
+                                    <td>DOB</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="patient in injection.queryResults">
+                                    <td>{{patient.mrn}}</td>
+                                    @*<td>{{patient.firstName}}</td>*@
+                                    <td><div ng-bind-html="patient.firstName"></div></td>
+                                    <td>{{patient.lastName}}</td>
+                                    <td>{{patient.dob | date : 'shortDate'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-database"></i> Patients
+                        </div>
+                        <div class="panel-body">
+                            The information below is what is in the patients table at this moment
+                            <button class="btn btn-info pull-right" ng-click="injection.Reseed()" title="Reseed Patients">
+                                <i class="fa fa-user-md">Reset Db</i>
+                            </button>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td>MRN</td>
+                                    <td>FirstName</td>
+                                    <td>LastName</td>
+                                    <td>DOB</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="patient in injection.patientsInDb">
+                                    <td>{{patient.mrn}}</td>
+                                    <td>{{patient.firstName}}</td>
+                                    <td>{{patient.lastName}}</td>
+                                    <td>{{patient.dob | date : 'shortDate'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@Html.Partial("Breadcrumbs")
+
+

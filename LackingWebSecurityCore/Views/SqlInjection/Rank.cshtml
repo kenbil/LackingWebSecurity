@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Rank";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Why It's &#35 1</h2>
+        <p>
+            Quite simply, according to the OWASP Risk Rating Methodology it's Exploitability is Easy and it's Technical Impacts are Severe.  It is the only vulnerability on the TOP 10 with this rating.
+        </p>
+        <p>
+            Injection attacks can and have been used to bypass authentication, steal data, change data, destroy data and even comprimise a machines.  Victims include NASDAQ, Visa, Sony and several banks.
+        </p>
+    </div>
+    <div class="col-md-8">
+        <img src="~/images/SQLInjectionRating.png" class="img-responsive" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>History</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h4>2013 &#35 1</h4>
+        <p>Injection retained it's &#35 1 ranking from 2010 with no signs of slowing down <br />
+        <a href="https://www.owasp.org/index.php/Top_10_2013-Top_10" target="_blank">OWASP Top 10 - 2013</a></p>
+    </div>
+
+    <div class="col-md-3">
+        <h4>2010 - &#35 1</h4>
+        <p>In 2010 the format and rating system is similar to what is used in the most recent reports.  The Injection Flaws risk from 2007 was renamed to Injection, it was number 1 <br />
+        <a href="https://www.owasp.org/index.php/Top_10_2010-Main" target="_blank">OWASP Top 10 - 2010</a>
+        </p>
+    </div>
+
+    <div class="col-md-3">
+        <h4>2007 - &#35 2</h4>
+        <p>The list in 2007 is pretty similar to todays format however the rating system was different.  The broad category (unvalidated input) from 2004 was deprecated in favor or more granular exploits.
+        Injection Flaws was number 2.  The rating system in 2007 was based on vulnerability trends from a <a href="http://cwe.mitre.org/documents/vuln-trends/index.html">2006 report by Mitre</a>. <br />
+        <a href="https://www.owasp.org/images/e/e8/OWASP_Top_10_2007.pdf" target="_blank">OWASP Top 10 - 2007</a>
+        </p>
+    </div>
+
+    <div class="col-md-3">
+        <h4>2004 - &#35 1<sup>ish</sup></h4>
+        <p>
+            The list in 2004 was pretty different than it is now.  Number 1 was a very broad category that encompassed multiple exploits.  Items further down the list were more granular examples of those exploits.
+            In 2004 number 1 on the list was unvalidated input.  In the description SQL Injection was listed as a possible result of not validating user input.
+            Number 6 was command injection, which is a broad category that encompasses SQL Injection. <br />
+            <a href="http://ufpr.dl.sourceforge.net/project/owasp/Top%20Ten/2004/OWASPTopTen2004.pdf" target="_blank">OWASP Top 10 - 2004</a>
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>In the Wild</h2>
+        <p>SQL Injection attacks are still very prominent.  Below is a very brief list of high value targets that have been exploited.  There are many, many more</p>
+        <ul>
+            <li>
+                <strong>2015</strong>
+                <ul>
+                    <li>Archos (French Smart Phone Manufacturer) - <a href="http://www.scmagazineuk.com/up-to-100k-archos-customers-compromised-by-sql-injection-attack/article/395642/" target="_blank">http://www.scmagazineuk.com/up-to-100k-archos-customers-compromised-by-sql-injection-attack/article/395642/</a></li>
+                </ul>
+            </li>
+            <li>
+                <strong>2014</strong>
+                <ul>
+                    <li>Bell Canada - <a href="https://www.troyhunt.com/heres-how-bell-was-hacked-sql-injection/" target="_blank">https://www.troyhunt.com/heres-how-bell-was-hacked-sql-injection/</a></li>
+                </ul>
+            </li>
+            <li><strong>2013</strong>
+                <ul>
+                    <li>Bit9 - <a href="http://www.computerworld.com/article/2495532/malware-vulnerabilities/hacking-victim-bit9-blames-sql-injection-flaw.html" target="_blank">http://www.computerworld.com/article/2495532/malware-vulnerabilities/hacking-victim-bit9-blames-sql-injection-flaw.html</a></li>
+                </ul>
+            </li>
+            <li>
+                <strong>2012</strong>
+                <ul>
+                    <li>FBI, NASA, Pentagon - <a href="http://www.cnet.com/news/ghostshell-claims-breach-of-1-6m-accounts-at-fbi-nasa-and-more/" target="_blank">http://www.cnet.com/news/ghostshell-claims-breach-of-1-6m-accounts-at-fbi-nasa-and-more/</a></li>
+                </ul>
+            </li>
+            <li>
+                <strong>2011</strong>
+                <ul>
+                    <li>Sony - <a href="http://www.thewire.com/technology/2011/09/lulzsecs-sony-hack-really-was-simple-it-claimed/42851/" target="_blank">http://www.thewire.com/technology/2011/09/lulzsecs-sony-hack-really-was-simple-it-claimed/42851/</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+@Html.Partial("BreadCrumbs")

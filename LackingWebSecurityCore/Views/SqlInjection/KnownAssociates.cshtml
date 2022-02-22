@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "KnownAssociates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <img src="~/images/Bonnie_and_Clyde.jpg" class="img-responsive" />
+    </div>
+    <div class="col-md-9">
+        <h2>Known Associates</h2>
+        <p>As previously mentioned, if an application is vulnerable to injection there's a good chance it has other vulnerabilites as well.  
+        Attackers can chain attacks together to reach their ultimate goal.  There are two in particular that chain really nicely with injection</p>
+
+        <ul class="list-unstyled">
+            <li>
+                <h4>Security Misconfiguration</h4>
+                <p>Security Misconfiguration is &#35 5 on the OWASP Top 10 in 2013.  It's a very broad category but the basic idea is that one or more components in the applications
+                technology stack is misconfigured which leaves it vulnerable.  This misconfiguration could be anything from the web server allowing directory browsing to code that
+                doesn't properly sanitize errors.<br />
+                In the case of injection, unsanitized errors can give attackers a much clearer look at how an application is built and what technology is used.  This information can
+                then be used to tune an attack so that it will be more effective.<br />
+                As an example, an attacker often won't know the database being used by an application.  Since Microsoft SQL, Oracle, DB2 etc all have slightly different syntax, this can
+                make it a little more difficult for an attacker to inject a syntactically correct statement.  However, if an application doesn't sanitize it's errors there is the possibility
+                that an error will reveal which database is being used or worse the exact query that is being executed.
+                </p>
+            </li>
+            <li>
+                <h4>XSS (Cross-Site Scripting)</h4>
+                <p>XSS is &#35 2 on the OWASP Top 10 in 2013.  It's actually a form of injection where unvalidated user data is interpreted by a browser.  This data can contain malicious HTML or 
+                javascript which will be rendered or executed by the browser.  An attacker may use SQL injection to add XSS code into an applications database so that when an unsuspecting user
+                access that record in your application, the code may execute.  Saving XSS into a database is called persistent XSS</p>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+@Html.Partial("BreadCrumbs")
+

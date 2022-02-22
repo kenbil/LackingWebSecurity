@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Defenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <img src="~/images/Syrian.hacker.jpg" class="img-responsive" />
+    </div>
+    <div class="col-md-9">
+        <h2>Defenses</h2>
+        <p>The best decense is to not allow user input into system level commands.  If you have to allow it, then you need to sanitize the input.  The best way to do this is to whitelist the allowed commands using a regex.</p>
+
+        <br />
+        <h4>Defense In Depth</h4>
+        <ol>
+            <li>Apply the principle of least privllege.  Make sure the application and web server are running using restricted accounts.  If they are running using root or SYSTEM accounts, the command injection could result in full server compromise.</li>
+            <li>Don't trust your data.  This seems strange but if your application allows users to add records to the database, they could have entered malicious data in the hopes that it will be interpretted at some point.  In your code, you can't assume the data in your database is harmless you have to assume it's malicious</li>
+        </ol>
+    </div>
+</div>
+
+
+@Html.Partial("BreadCrumbs")

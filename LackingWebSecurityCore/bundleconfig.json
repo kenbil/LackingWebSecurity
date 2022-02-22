@@ -1,0 +1,17 @@
+[
+  
+  {
+    "outputFileName": "wwwroot/js/app.min.js",
+    "inputFiles": [
+      "wwwroot/lib/toastr/toastr.js",
+      "wwwroot/lib/angularjs/angular.min.js",
+      "wwwroot/app/notifications/notificationService.js",
+      "wwwroot/app/app.js",
+      "wwwroot/app/injection/app.injection.controller.js"
+    ],
+    "minify": {
+      "enabled": false
+    },
+    "sourceMap": true
+  }
+]
